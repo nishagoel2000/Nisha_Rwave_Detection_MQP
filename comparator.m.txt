@@ -1,0 +1,16 @@
+function []=comparator(qrs_i_raw)
+%% Input
+% qrs_i_raw : one of the RWave_Detection() function outputs; the R-wave
+% pulse train returned by the function
+%% Output
+% a bxb report is created as a .txt file
+%% Be sure to modify the record number for each run
+%read in the R-wave locations from Physionet annotation file
+[sig_ann, ann_type,  subtype, chan, num, comments] = rdann('100', 'atr');
+
+%write a .test file that has the locations of the R-waves as determined by the RWave_Detection() function
+wrann('100', 'test', qrs_i_raw, 'N', zeros(length(qrs_i_raw),1), ones(length(qrs_i_raw),1), zeros(length(qrs_i_raw),1), []); 
+
+clear; clc;
+bxb('100','atr','test','100_bxbReport.txt');
+end
